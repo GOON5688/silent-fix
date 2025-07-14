@@ -30,3 +30,5 @@ async function fixMessage() {
 
   document.getElementById("output").innerText = text;
 }
+<script src="script.js"></script>
+
