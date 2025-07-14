@@ -1,34 +1,41 @@
 async function fixMessage() {
-  const input = document.getElementById('input').value;
+  const input = document.getElementById('input').value.trim();
   const tone = document.getElementById('tone').value;
+  const output = document.getElementById('output');
 
-  // 1. Translate Urdu to English using LibreTranslate
-  const translateRes = await fetch("https://libretranslate.de/translate", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      q: input,
-      source: "ur",
-      target: "en",
-      format: "text"
-    })
-  });
-
-  const translated = await translateRes.json();
-  let text = translated.translatedText;
-
-  // 2. Apply tone rewriter
-  if (tone === "polite") {
-    text = text.replace("you", "sir/madam").replace("can", "would you mind");
-  }
-  if (tone === "friendly") {
-    text = "Hey! " + text;
-  }
-  if (tone === "apologetic") {
-    text = "I'm really sorry, but " + text;
+  if (!input) {
+    output.innerText = "Please enter some text.";
+    return;
   }
 
-  document.getElementById("output").innerText = text;
+  try {
+    const translateRes = await fetch("https://libretranslate.de/translate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        q: input,
+        source: "ur",
+        target: "en",
+        format: "text"
+      })
+    });
+
+    const translated = await translateRes.json();
+    let text = translated.translatedText;
+
+    // Apply tone
+    if (tone === "polite") {
+      text = "Kindly note: " + text;
+    } else if (tone === "friendly") {
+      text = "Hey there! " + text;
+    } else if (tone === "apologetic") {
+      text = "I'm really sorry, but " + text;
+    }
+
+    output.innerText = text;
+
+  } catch (err) {
+    output.innerText = "Something went wrong. Try again.";
+    console.error(err);
+  }
 }
-<script src="script.js"></script>
-
