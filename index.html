@@ -3,26 +3,42 @@
 <head>
   <meta charset="UTF-8" />
   <title>SilentFix</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Use TailwindCSS via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 min-h-screen flex flex-col items-center justify-center p-6">
 
-  <h1 class="text-3xl font-bold mb-4">SilentFix</h1>
+  <h1 class="text-3xl font-bold text-center mb-4 text-blue-700">SilentFix</h1>
 
-  <textarea id="input" placeholder="Paste Urdu / Roman Urdu here..." class="w-full max-w-md h-32 p-3 rounded shadow mb-3 border"></textarea>
+  <textarea
+    id="input"
+    placeholder="Paste Urdu / Roman Urdu message here..."
+    class="w-full max-w-md h-32 p-3 rounded border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 mb-3"
+  ></textarea>
 
-  <select id="tone" class="w-full max-w-md p-2 rounded shadow mb-3 border">
+  <select
+    id="tone"
+    class="w-full max-w-md p-2 rounded border border-gray-300 shadow-sm mb-3"
+  >
     <option value="polite">Polite</option>
     <option value="friendly">Friendly</option>
     <option value="apologetic">Apologetic</option>
   </select>
 
-  <button id="fixBtn" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">
+  <button
+    id="fixBtn"
+    class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition mb-4"
+  >
     Fix My Message
   </button>
 
-  <div id="output" class="w-full max-w-md mt-6 bg-white p-4 rounded shadow text-sm whitespace-pre-wrap"></div>
+  <div
+    id="output"
+    class="w-full max-w-md bg-white p-4 rounded shadow text-sm whitespace-pre-wrap border border-gray-200 min-h-[80px]"
+  ></div>
 
+  <!-- Your JavaScript -->
   <script src="script.js" defer></script>
 </body>
 </html>
