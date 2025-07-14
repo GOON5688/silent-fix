@@ -6,25 +6,32 @@ async function fixMessage() {
   const output = document.getElementById('output');
 
   if (!input) {
-    output.innerText = "Please enter some text.";
+    output.innerText = "❗ Please enter some text to translate.";
     return;
   }
 
+  output.innerText = "⏳ Translating... Please wait.";
+
   try {
-    const translateRes = await fetch("https://translate.terraprint.co/translate", {
+    // Send request to your Vercel backend API
+    const response = await fetch("/api/translate", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         q: input,
         source: "ur",
-        target: "en",
-        format: "text"
+        target: "en"
       })
     });
 
-    const translated = await translateRes.json();
-    let text = translated.translatedText;
+    if (!response.ok) {
+      throw new Error("Translation API error");
+    }
 
+    const data = await response.json();
+    let text = data.translatedText;
+
+    // Tone modifications
     if (tone === "polite") {
       text = "Kindly note: " + text;
     } else if (tone === "friendly") {
@@ -36,7 +43,7 @@ async function fixMessage() {
     output.innerText = text;
 
   } catch (err) {
-    output.innerText = "Something went wrong. Try again.";
     console.error(err);
+    output.innerText = "❌ Translation failed. Please try again.";
   }
 }
