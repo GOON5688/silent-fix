@@ -1,24 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>SilentFix</title>
-  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-  <h1>SilentFix</h1>
-  <textarea id="input" placeholder="Paste your Urdu / Roman Urdu text here..."></textarea>
-  
-  <select id="tone">
+<body class="bg-gray-100 min-h-screen flex flex-col items-center justify-center p-6">
+
+  <h1 class="text-3xl font-bold mb-4">SilentFix</h1>
+
+  <textarea id="input" placeholder="Paste Urdu / Roman Urdu here..." class="w-full max-w-md h-32 p-3 rounded shadow mb-3 border"></textarea>
+
+  <select id="tone" class="w-full max-w-md p-2 rounded shadow mb-3 border">
     <option value="polite">Polite</option>
     <option value="friendly">Friendly</option>
     <option value="apologetic">Apologetic</option>
   </select>
-  
-  <button onclick="fixMessage()">Fix My Message</button>
-  <p><strong>Output:</strong></p>
-  <div id="output"></div>
 
-  <script src="script.js"></script>
+  <button id="fixBtn" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">
+    Fix My Message
+  </button>
+
+  <div id="output" class="w-full max-w-md mt-6 bg-white p-4 rounded shadow text-sm whitespace-pre-wrap"></div>
+
+  <script src="script.js" defer></script>
 </body>
 </html>
